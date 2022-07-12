@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>todo</title>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <style>
+    ul {
+      list-style-type: none;
+    }
+    ul li {
+      margin: 5px;
+    }
+    ul li .complete {
+      text-decoration: line-through;
+      color: #ddd;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <p>
+      NewTask:
+      <input type="text" v-model="newTask" />
+      <button @click="addTodo">Add</button>
+    </p>
+    <hr />
+    <ul>
+      <li v-for="(todo,idx) in todos" :key="idx">
+        <input type="checkbox" v-model="todo.isCompleted" />
+        <span :class="{ 'complete': todo.isCompleted }">{{ todo.task }}</span>
+        <button @click="deleteTodo(idx)">Delete</button>
+      </li>
+    </ul>
+    <p>Remaining Tasks: {{ remains }}/{{ todos.length }}</p>
+  </div>
+  <script>
+
+    new Vue({
+      el: '#app',
+      data: {
+        newTask: '',
+        todos: [
+          { task: '上课', isCompleted: false },
+          { task: '购物', isCompleted: false },
+          { task: '打工', isCompleted: false }
+        ]
+      },
+      methods: {
+        addTodo() {
+          if (this.newTask.trim() == '') return
+          this.todos.push(
+            { task: this.newTask, isCompleted: false }
+          )
+          this.newTask = ''
+        },
+        deleteTodo(idx) {
+          this.todos.splice(idx, 1)
+        }
+      },
+      computed: {
+        remains() {
+          var counter = 0
+          this.todos.forEach(element => {
+            if (!element.isCompleted) {
+              counter++
+            }
+          })
+          return counter
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

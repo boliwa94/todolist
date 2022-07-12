@@ -10,16 +10,13 @@
   </div>
 </template>
 <script>
-import MyHeader from "./components/MyHeader";
-import MyFooter from "./components/MyFooter";
-import MyList from "./components/MyList";
+import MyHeader from './components/MyHeader'
+import MyList from './components/MyList'
+import MyFooter from './components/MyFooter'
+
 export default {
-  name: 'app',
-  compenents: {
-    MyHeader,
-    MyList,
-    MyFooter
-  },
+  name: 'App',
+  compenents: { MyHeader, MyList, MyFooter },
   data() {
     return {
       todos: [
